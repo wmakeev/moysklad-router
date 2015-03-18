@@ -1,0 +1,28 @@
+{
+  "name": "moysklad-router",
+  "version": "0.1.0-beta.1",
+  "description": "Разбор и создание строки url приложения МойСклад",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o dist/moysklad-router.js -s moyskladRouter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmakeev/moysklad-router"
+  },
+  "keywords": [
+    "moysklad",
+    "router"
+  ],
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "sinon-chai": "^2.6.0"
+  },
+  "author": "Vitaliy V. Makeev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wmakeev/moysklad-router/issues"
+  },
+  "homepage": "https://github.com/wmakeev/moysklad-router"
+}

@@ -1,0 +1,2 @@
+--reporter spec
+spec/*.spec.js

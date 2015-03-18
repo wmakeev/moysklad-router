@@ -1,0 +1,130 @@
+[
+  {
+    "urls": [
+      "https://online.moysklad.ru",
+      "https://online.moysklad.ru/",
+      "https://online.moysklad.ru/#"
+    ],
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": null,
+      "query": null,
+      "hash": {}
+    }
+  },
+  {
+    "url": "https://online.moysklad.ru/?returnPath=/app/",
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": null,
+      "query": {
+        "returnPath": "/app/"
+      },
+      "hash": {}
+    }
+  },
+  {
+    "urls": [
+      "https://online.moysklad.ru/app",
+      "https://online.moysklad.ru/app/",
+      "https://online.moysklad.ru/app/#"
+    ],
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": "app",
+      "query": null,
+      "hash": {}
+    }
+  },
+  {
+    "urls": [
+      "https://online.moysklad.ru/app/admin",
+      "https://online.moysklad.ru/app/admin/",
+      "https://online.moysklad.ru/app/admin/#"
+    ],
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": "app/admin",
+      "query": null,
+      "hash": {}
+    }
+  },
+  {
+    "urls": [
+      "https://online.moysklad.ru/app/admin/#mycompany",
+      "https://online.moysklad.ru/app/admin/#mycompany/"
+    ],
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": "app/admin",
+      "query": null,
+      "hash": {
+        "section": "mycompany",
+        "action": null,
+        "query": {}
+      }
+    }
+  },
+  {
+    "urls": [
+      "https://online.moysklad.ru/app/#mycompany/edit",
+      "https://online.moysklad.ru/app/#mycompany/edit/"
+    ],
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": "app",
+      "query": null,
+      "hash": {
+        "section": "mycompany",
+        "action": "edit",
+        "query": {}
+      }
+    }
+  },
+  {
+    "url": "https://online.moysklad.ru/app/admin/#custom_ae3b-64?sort=o.name%20a",
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": "app/admin",
+      "query": null,
+      "hash": {
+        "section": "custom_ae3b-64",
+        "action": null,
+        "query": {
+          "sort": "o.name a"
+        }
+      }
+    }
+  },
+  {
+    "url": "https://online.moysklad.ru/app/#custom_ae3b-64/view?sort=o.name%20a",
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": "app",
+      "query": null,
+      "hash": {
+        "section": "custom_ae3b-64",
+        "action": "view",
+        "query": {
+          "sort": "o.name a"
+        }
+      }
+    }
+  },
+  {
+    "url": "https://online.moysklad.ru/app/#customerorder?global_stateFilter=7be2675a-dc76-4435-8cce-1c64bb6bfd34,%D0%9E%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD,0100,State&global_customerOrderShippingStatusFilter=unshipped,",
+    "result": {
+      "host": "online.moysklad.ru",
+      "app": "app",
+      "query": null,
+      "hash": {
+        "section": "customerorder",
+        "action": null,
+        "query": {
+          "global_customerOrderShippingStatusFilter": "unshipped,",
+          "global_stateFilter": "7be2675a-dc76-4435-8cce-1c64bb6bfd34,Оформлен,0100,State"
+        }
+      }
+    }
+  }
+]
