@@ -78,7 +78,7 @@ module.exports = Router;
 var routeRegex = /https:\/\/([\w.]+)\/?(?:([\w]+\/?[\w]+))?(?:\?(.+))?(?:\/#)?(?:([\w-]+)(?:\/(\w+))?(?:\?(.+))?)?/;
 
 function parseQueryString(queryString) {
-    var queryParams = null;
+    var queryParams = {};
     if (queryString) {
         queryParams = {};
         queryString.split('&').forEach(function (queryPart) {
@@ -94,17 +94,20 @@ var parseUrl = function (url) {
 
     if (match && match.length) {
         var result = {
-            host        : match[1],
-            app         : match[2] || null,
-            query       : parseQueryString(match[3])
+            host: match[1]
         };
 
-        result.hash = match[4] ?
-        {
-            section: match[4],
-            action: match[5] || null,
-            query: parseQueryString(match[6]) || {}
-        } : {};
+        if (match[2]) result.app    = match[2];
+        result.query = parseQueryString(match[3]);
+
+        var hash = result.hash = {
+            query: parseQueryString(match[6])
+        };
+
+        if (match[4]) {
+            hash.section = match[4];
+            if (match[5]) hash.action = match[5];
+        }
 
         return result;
     }
