@@ -13,7 +13,7 @@ chai.use(require("sinon-chai"));
 describe('moysklad-router', function () {
 
     beforeEach(function () {
-        var Router      = this.Router   = require('../src');
+        this.Router   = require('../src');
         global.window = {
             onhashchange: {},
             addEventListener: sinon.spy(),
@@ -162,23 +162,21 @@ describe('moysklad-router', function () {
             var arg1 = {
                 "newURL": {
                     "app": "app",
+                    "query": {},
                     "hash": {
-                        "action": null,
                         "query": {},
                         "section": "demand"
                     },
-                    "host": "online.moysklad.ru",
-                    "query": null
+                    "host": "online.moysklad.ru"
                 },
                 "oldURL": {
                     "app": "app",
+                    "query": {},
                     "hash": {
-                        "action": null,
                         "query": {},
                         "section": "customerorder"
                     },
-                    "host": "online.moysklad.ru",
-                    "query": null
+                    "host": "online.moysklad.ru"
                 }
             };
 

@@ -7,20 +7,22 @@
     ],
     "result": {
       "host": "online.moysklad.ru",
-      "app": null,
-      "query": null,
-      "hash": {}
+      "query": {},
+      "hash": {
+        "query": {}
+      }
     }
   },
   {
     "url": "https://online.moysklad.ru/?returnPath=/app/",
     "result": {
       "host": "online.moysklad.ru",
-      "app": null,
       "query": {
         "returnPath": "/app/"
       },
-      "hash": {}
+      "hash": {
+        "query": {}
+      }
     }
   },
   {
@@ -32,8 +34,10 @@
     "result": {
       "host": "online.moysklad.ru",
       "app": "app",
-      "query": null,
-      "hash": {}
+      "query": {},
+      "hash": {
+        "query": {}
+      }
     }
   },
   {
@@ -45,8 +49,10 @@
     "result": {
       "host": "online.moysklad.ru",
       "app": "app/admin",
-      "query": null,
-      "hash": {}
+      "query": {},
+      "hash": {
+        "query": {}
+      }
     }
   },
   {
@@ -57,10 +63,9 @@
     "result": {
       "host": "online.moysklad.ru",
       "app": "app/admin",
-      "query": null,
+      "query": {},
       "hash": {
         "section": "mycompany",
-        "action": null,
         "query": {}
       }
     }
@@ -73,7 +78,7 @@
     "result": {
       "host": "online.moysklad.ru",
       "app": "app",
-      "query": null,
+      "query": {},
       "hash": {
         "section": "mycompany",
         "action": "edit",
@@ -86,10 +91,9 @@
     "result": {
       "host": "online.moysklad.ru",
       "app": "app/admin",
-      "query": null,
+      "query": {},
       "hash": {
         "section": "custom_ae3b-64",
-        "action": null,
         "query": {
           "sort": "o.name a"
         }
@@ -101,7 +105,7 @@
     "result": {
       "host": "online.moysklad.ru",
       "app": "app",
-      "query": null,
+      "query": {},
       "hash": {
         "section": "custom_ae3b-64",
         "action": "view",
@@ -116,10 +120,9 @@
     "result": {
       "host": "online.moysklad.ru",
       "app": "app",
-      "query": null,
+      "query": {},
       "hash": {
         "section": "customerorder",
-        "action": null,
         "query": {
           "global_customerOrderShippingStatusFilter": "unshipped,",
           "global_stateFilter": "7be2675a-dc76-4435-8cce-1c64bb6bfd34,Оформлен,0100,State"
