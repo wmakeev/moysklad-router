@@ -124,8 +124,8 @@
       "hash": {
         "section": "customerorder",
         "query": {
-          "global_customerOrderShippingStatusFilter": "unshipped,",
-          "global_stateFilter": "7be2675a-dc76-4435-8cce-1c64bb6bfd34,Оформлен,0100,State"
+          "global_customerOrderShippingStatusFilter": "unshipped",
+          "global_stateFilter": ["7be2675a-dc76-4435-8cce-1c64bb6bfd34", "Оформлен", "0100", "State"]
         }
       }
     }
