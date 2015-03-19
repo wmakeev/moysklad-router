@@ -77,13 +77,26 @@ module.exports = Router;
 // https://regex101.com/r/yS0bG7/7
 var routeRegex = /https:\/\/([\w.]+)\/?(?:([\w]+\/?[\w]+))?(?:\?(.+))?(?:\/#)?(?:([\w-]+)(?:\/(\w+))?(?:\?(.+))?)?/;
 
+// trims
+var trimEnd   = /(,*)$/,
+    trimStart = /^(,*)/;
+
+function extractQueryValue (str) {
+    str = str.replace(trimStart, '').replace(trimEnd, '');
+    return str.indexOf(',') !== -1
+        ? str.split(',').map(decodeURIComponent)
+        : decodeURIComponent(str);
+}
+
 function parseQueryString(queryString) {
     var queryParams = {};
     if (queryString) {
         queryParams = {};
         queryString.split('&').forEach(function (queryPart) {
             var kv = queryPart.split('=');
-            queryParams[kv[0]] = kv[1] ? decodeURIComponent(kv[1]) : null;
+            queryParams[kv[0]] = kv[1]
+                ? extractQueryValue(kv[1])
+                : null;
         });
     }
     return queryParams;
