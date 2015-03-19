@@ -162,20 +162,16 @@ describe('moysklad-router', function () {
             var arg1 = {
                 "newURL": {
                     "app": "app",
+                    "queryString": {},
                     "query": {},
-                    "hash": {
-                        "query": {},
-                        "section": "demand"
-                    },
+                    "section": "demand",
                     "host": "online.moysklad.ru"
                 },
                 "oldURL": {
                     "app": "app",
+                    "queryString": {},
                     "query": {},
-                    "hash": {
-                        "query": {},
-                        "section": "customerorder"
-                    },
+                    "section": "customerorder",
                     "host": "online.moysklad.ru"
                 }
             };
