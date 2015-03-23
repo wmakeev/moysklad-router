@@ -16,7 +16,6 @@ function extractQueryValue (str) {
 function parseQueryString(queryString) {
     var queryParams = {};
     if (queryString) {
-        queryParams = {};
         queryString.split('&').forEach(function (queryPart) {
             var kv = queryPart.split('=');
             queryParams[kv[0]] = kv[1]

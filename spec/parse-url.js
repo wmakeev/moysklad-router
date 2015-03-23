@@ -13,7 +13,7 @@ module.exports = function () {
     });
 
     it('should be defined', function () {
-        expect(this.parseUrl).to.be.ok;
+        expect(this.parseUrl).not.to.be.undefined;
     });
 
     it('should be function', function () {
@@ -21,7 +21,7 @@ module.exports = function () {
     });
 
     it('should return undefined on non moysklad url', function () {
-        expect(this.parseUrl('some/foo')).not.to.be.ok;
+        expect(this.parseUrl('some/foo')).to.be.undefined;
     });
 
     it('should parse moysklad urls', function () {

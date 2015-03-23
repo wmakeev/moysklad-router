@@ -15,6 +15,9 @@ describe('moysklad-router', function () {
     beforeEach(function () {
         this.Router   = require('../src');
         global.window = {
+            location: {
+                href: "https://online.moysklad.ru/app/#warehouse/edit?id=eed5fae7-c949-4258-8e27-69f306d7166c"
+            },
             onhashchange: {},
             addEventListener: sinon.spy(),
             removeEventListener: sinon.spy()
@@ -58,6 +61,9 @@ describe('moysklad-router', function () {
                 .to.be.ok.and
                 .to.be.a('function');
 
+            expect(this.router.state)
+                .to.be.eql(null);
+
             expect(this.router.addRouteHandler)
                 .to.be.ok.and
                 .to.be.a('function');
@@ -83,10 +89,19 @@ describe('moysklad-router', function () {
         });
 
         it('should add and remove checkUrl event listener to hashchange event', function () {
-            this.router.start();
+            var expectation = sinon.mock(this.router);
+
+            expectation
+                .expects("checkUrl")
+                .withArgs('https://online.moysklad.ru/app/#warehouse/edit?id=eed5fae7-c949-4258-8e27-69f306d7166c');
+
+            var router = this.router.start();
             expect(global.window.addEventListener)
                 .to.be.calledOnce.and
                 .calledWith("hashchange", this.router.checkUrl, false);
+            expect(router).to.be.equal(this);
+
+            expectation.verify();
 
             this.router.stop();
             expect(global.window.removeEventListener)
@@ -178,6 +193,8 @@ describe('moysklad-router', function () {
 
             expect(spy1).to.be.calledOnce.and.calledWith(arg1);
             expect(spy2).to.be.calledOnce.and.calledWith(arg1);
+
+            expect(this.router.state).to.be.eql(arg1);
         });
     });
 

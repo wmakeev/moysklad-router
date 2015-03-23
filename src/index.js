@@ -16,12 +16,15 @@ var Router = function (options) {
         return new Router(options);
     }
     this.checkUrl = this.checkUrl.bind(this);
+    this.state = null;
 };
 
 Router.prototype.start = function () {
     if (window && "onhashchange" in window) {
         window.addEventListener("hashchange", this.checkUrl, false);
+        this.checkUrl(window.location.href);
     } else throw new Error('The browser not supports the hashchange event!');
+    return this;
 };
 
 Router.prototype.stop = function () {
@@ -29,12 +32,14 @@ Router.prototype.stop = function () {
 };
 
 Router.prototype.checkUrl = function (e) {
-    if (this._handlers && this._handlers.length) {
-        this._handlers.forEach(function (handler) {
-            handler({
-                newURL: parseUrl(e.newURL),
-                oldURL: parseUrl(e.oldURL)
-            });
+    var that = this;
+    if (that._handlers && that._handlers.length) {
+        that.state = {
+            newURL: parseUrl(e.newURL),
+            oldURL: parseUrl(e.oldURL)
+        };
+        that._handlers.forEach(function (handler) {
+            handler(that.state);
         });
     }
 };
