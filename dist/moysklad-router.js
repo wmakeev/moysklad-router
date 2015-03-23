@@ -45,11 +45,11 @@ Router.prototype.stop = function () {
 
 Router.prototype.checkUrl = function (e) {
     var that = this;
+    that.state = {
+        newURL: parseUrl(e.newURL),
+        oldURL: parseUrl(e.oldURL)
+    };
     if (that._handlers && that._handlers.length) {
-        that.state = {
-            newURL: parseUrl(e.newURL),
-            oldURL: parseUrl(e.oldURL)
-        };
         that._handlers.forEach(function (handler) {
             handler(that.state);
         });

@@ -89,19 +89,14 @@ describe('moysklad-router', function () {
         });
 
         it('should add and remove checkUrl event listener to hashchange event', function () {
-            var checkUrlSpy = this.router.checkUrl = sinon.spy();
 
             var router = this.router.start();
             expect(global.window.addEventListener).to.be
                 .calledOnce.and
                 .calledWith("hashchange", this.router.checkUrl, false);
 
-            expect(checkUrlSpy).to.be
-                .calledOnce.and
-                .calledWith({
-                    newURL: 'https://online.moysklad.ru/app/#warehouse/edit?id=eed5fae7-c949-4258-8e27-69f306d7166c',
-                    oldURL: undefined
-                });
+            expect(router.state).to.be.ok;
+            expect(router.state.newURL.section).to.be.equal('warehouse');
 
             this.router.stop();
             expect(global.window.removeEventListener)
