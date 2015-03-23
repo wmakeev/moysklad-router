@@ -31,7 +31,10 @@ var Router = function (options) {
 Router.prototype.start = function () {
     if (window && "onhashchange" in window) {
         window.addEventListener("hashchange", this.checkUrl, false);
-        this.checkUrl(window.location.href);
+        this.checkUrl({
+            newURL: window.location.href,
+            oldURL: undefined
+        });
     } else throw new Error('The browser not supports the hashchange event!');
     return this;
 };
