@@ -4,6 +4,8 @@
  * Vitaliy V. Makeev (w.makeev@gmail.com)
  */
 
+var pkg = require('../package');
+
 var parseUrl = require('./parse-url'),
     buildUrl = require('./build-url'),
     EventEmitter = require('event-emitter'),
@@ -42,6 +44,8 @@ var Router = function (options) {
     var router = function (route, isMod) {
         router.navigate(route, isMod);
     };
+
+    router.VERSION = pkg.version;
 
     EventEmitter(router);
 

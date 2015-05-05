@@ -4,6 +4,8 @@
  * Vitaliy V. Makeev (w.makeev@gmail.com)
  */
 
+var pkg = require('../package');
+
 global.sinon  = require("sinon");
 global.chai   = require("chai");
 
@@ -39,6 +41,11 @@ describe('moysklad-router', function () {
         });
 
         it('should have methods', function () {
+
+            expect(this.router.VERSION)
+                .to.be.ok.and
+                .to.be.equal(pkg.version);
+
             expect(this.router.start)
                 .to.be.ok.and
                 .to.be.a('function');
