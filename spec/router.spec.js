@@ -32,20 +32,10 @@ describe('moysklad-router', function () {
         expect(this.Router).to.be.a('function');
     });
 
-    it('should be constructor', function() {
-        var router = new this.Router();
-        expect(router).to.be.instanceof(this.Router);
-    });
-
-    it('should be called without "new"', function() {
-        var router = this.Router();
-        expect(router).to.be.instanceof(this.Router);
-    });
-    
     describe('instance', function () {
         
         beforeEach(function () {
-            this.router = new this.Router;
+            this.router = this.Router();
         });
 
         it('should have methods', function () {
@@ -61,18 +51,30 @@ describe('moysklad-router', function () {
                 .to.be.ok.and
                 .to.be.a('function');
 
+            expect(this.router.navigate)
+                .to.be.ok.and
+                .to.be.a('function');
+
+            expect(this.router.replaceState)
+                .to.be.ok.and
+                .to.be.a('function');
+
+            expect(this.router.refresh)
+                .to.be.ok.and
+                .to.be.a('function');
+
+            expect(this.router.getState)
+                .to.be.ok.and
+                .to.be.a('function');
+
             expect(this.router.state)
                 .to.be.eql(null);
 
-            expect(this.router.addRouteHandler)
+            expect(this.router.on)
                 .to.be.ok.and
                 .to.be.a('function');
 
-            expect(this.router.removeRouteHandler)
-                .to.be.ok.and
-                .to.be.a('function');
-
-            expect(this.router.removeAllRouteHandlers)
+            expect(this.router.off)
                 .to.be.ok.and
                 .to.be.a('function');
         });
@@ -96,7 +98,7 @@ describe('moysklad-router', function () {
                 .calledWith("hashchange", this.router.checkUrl, false);
 
             expect(router.state).to.be.ok;
-            expect(router.state.newURL.section).to.be.equal('warehouse');
+            expect(router.state.section).to.be.equal('warehouse');
 
             this.router.stop();
             expect(global.window.removeEventListener)
@@ -104,67 +106,15 @@ describe('moysklad-router', function () {
                 .calledWith("hashchange", this.router.checkUrl);
         });
 
-        it('addRouteHandler should throw if route handler is not function', function () {
-            var that = this;
-            expect(function () {
-                that.router.addRouteHandler({});
-            }).to.throw('Handler must be a function');
-        });
-
-        it('removeRouteHandler should throw if route handler is not function', function () {
-            var that = this;
-            expect(function () {
-                that.router.removeRouteHandler({});
-            }).to.throw('Handler must be a function');
-        });
-
-        it('should set route handler', function () {
-            var handler = function () {};
-            this.router.addRouteHandler(handler);
-            expect(this.router._handlers[0]).to.equal(handler);
-        });
-
-        it('should set same route handler only once', function () {
-            var handler = function () {};
-            this.router.addRouteHandler(handler);
-            this.router.addRouteHandler(handler);
-            expect(this.router._handlers.length).to.equal(1);
-            expect(this.router._handlers[0]).to.equal(handler);
-        });
-
-        it('should remove specific route handler', function () {
-            var handler1 = function () {};
-            this.router.addRouteHandler(handler1);
-
-            var handler2 = function () {};
-            this.router.addRouteHandler(handler2);
-
-            this.router.removeRouteHandler(handler1);
-
-            expect(this.router._handlers.length).to.equal(1);
-            expect(this.router._handlers[0]).to.equal(handler2);
-        });
-
-        it('should remove all route handlers', function () {
-            this.router.addRouteHandler(function () {});
-            this.router.addRouteHandler(function () {});
-
-            this.router.removeAllRouteHandlers();
-
-            expect(this.router._handlers.length).to.equal(0);
-        });
-
         it('should call all route handlers on checkUrl', function () {
             var spy1 = sinon.spy();
-            this.router.addRouteHandler(spy1);
+            this.router.on('route', spy1);
 
             var spy2 = sinon.spy();
-            this.router.addRouteHandler(spy2);
+            this.router.on('route', spy2);
 
             // checkUrl should be binded to this router
-            var checkUrl = this.router.checkUrl;
-
-            checkUrl({
+            this.router.checkUrl({
                 newURL: 'https://online.moysklad.ru/app/#demand',
                 oldURL: 'https://online.moysklad.ru/app/#customerorder'
             });
@@ -186,13 +136,32 @@ describe('moysklad-router', function () {
                 }
             };
 
-            expect(spy1).to.be.calledOnce.and.calledWith(arg1);
-            expect(spy2).to.be.calledOnce.and.calledWith(arg1);
+            expect(spy1).to.be.calledOnce.and.calledWith(arg1.newURL, this.router);
+            expect(spy2).to.be.calledOnce.and.calledWith(arg1.newURL, this.router);
 
-            expect(this.router.state).to.be.eql(arg1);
+            expect(this.router.state).to.be.eql(arg1.newURL);
         });
+
+        it('should emit "start" event on router.start()', function () {
+            //TODO
+        });
+
+        it('should emit "stop" event on router.stop()', function () {
+            //TODO
+        });
+
+        //TODO navigate
+
+        //TODO getState
+
+        //TODO replaceState
+
+        //TODO refresh
+
     });
 
     describe('parse-url', require('./parse-url'));
+
+    describe('build-url', require('./build-url'));
 
 });

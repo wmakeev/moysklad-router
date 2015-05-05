@@ -12,11 +12,22 @@
     }
   },
   {
-    "url": "https://online.moysklad.ru/?returnPath=/app/",
+    "url": "https://online.moysklad.ru/?returnPath=%2Fapp%2F",
     "result": {
       "host": "online.moysklad.ru",
       "queryString": {
         "returnPath": "/app/"
+      },
+      "query": {}
+    }
+  },
+  {
+    "url": "https://online.moysklad.ru/?foo=value&bar",
+    "result": {
+      "host": "online.moysklad.ru",
+      "queryString": {
+        "foo": "value",
+        "bar": null
       },
       "query": {}
     }

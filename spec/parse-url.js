@@ -4,7 +4,7 @@
  * Vitaliy V. Makeev (w.makeev@gmail.com)
  */
 
-var cases = require('./parse-url-cases');
+var cases = require('./url-test-cases');
 
 module.exports = function () {
 
@@ -33,7 +33,7 @@ module.exports = function () {
                 expect(that.parseUrl(url)).to.be.eql(caseItem.result)
             })
         })
-    })
+    });
 
 };
 

@@ -7,24 +7,9 @@
 // https://regex101.com/r/yS0bG7/7
 var routeRegex = /https:\/\/([\w.]+)\/?(?:([\w]+\/?[\w]+))?(?:\?(.+))?(?:\/#)?(?:([\w-]+)(?:\/(\w+))?(?:\?(.+))?)?/;
 
-function extractQueryValue (str) {
-    return str.indexOf(',') !== -1
-        ? str.split(',').map(decodeURIComponent)
-        : decodeURIComponent(str);
-}
 
-function parseQueryString(queryString) {
-    var queryParams = {};
-    if (queryString) {
-        queryString.split('&').forEach(function (queryPart) {
-            var kv = queryPart.split('=');
-            queryParams[kv[0]] = kv[1]
-                ? extractQueryValue(kv[1])
-                : null;
-        });
-    }
-    return queryParams;
-}
+
+var parseQueryString = require('./parse-query-string');
 
 var parseUrl = function (url) {
     var match = routeRegex.exec(url);
