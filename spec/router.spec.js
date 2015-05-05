@@ -67,6 +67,10 @@ describe('moysklad-router', function () {
                 .to.be.ok.and
                 .to.be.a('function');
 
+            expect(this.router.getHashPath)
+                .to.be.ok.and
+                .to.be.a('function');
+
             expect(this.router.state)
                 .to.be.eql(null);
 
@@ -81,13 +85,13 @@ describe('moysklad-router', function () {
 
         it('should throw error if no window.hashchange', function () {
             delete global.window.onhashchange;
-            expect(this.router.start)
+            expect(this.router.start.bind(this.router))
                 .to.throw('The browser not supports the hashchange event!');
         });
 
         it('should not throw if window.hashchange exist', function () {
-            expect(this.router.start)
-                .to.not.throw('The browser not supports the hashchange event!');
+            expect(this.router.start.bind(this.router))
+                .to.not.throw();
         });
 
         it('should add and remove checkUrl event listener to hashchange event', function () {
@@ -157,6 +161,11 @@ describe('moysklad-router', function () {
         //TODO replaceState
 
         //TODO refresh
+
+        it('should return hash path', function () {
+            this.router.start();
+            expect(this.router.getHashPath()).to.be.equal('warehouse/edit');
+        })
 
     });
 

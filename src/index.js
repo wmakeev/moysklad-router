@@ -52,6 +52,7 @@ var Router = function (options) {
     router.replaceState = replaceState;
     router.refresh = refresh;
     router.getState = getState;
+    router.getHashPath = getHashPath;
     router.state = null;
 
     return router;
@@ -102,6 +103,11 @@ var refresh = function () {
             refresh: +(new Date)
         }
     }, true)
+};
+
+var getHashPath = function () {
+    var _state = this.getState();
+    return _state.section + (_state.action ? '/' + _state.action : '');
 };
 
 var getState = function () {
