@@ -6,7 +6,7 @@
  */
 
 module.exports = require('./src');
-},{"./src":54}],2:[function(require,module,exports){
+},{"./src":55}],2:[function(require,module,exports){
 'use strict';
 
 var d        = require('d')
@@ -2260,6 +2260,42 @@ module.exports=require(27)
 },{}],51:[function(require,module,exports){
 module.exports=require(23)
 },{}],52:[function(require,module,exports){
+module.exports={
+  "name": "moysklad-router",
+  "version": "0.1.2",
+  "description": "Взаимодействие с url приложения МойСклад",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o dist/moysklad-router.js -s MoyskladRouter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmakeev/moysklad-router"
+  },
+  "keywords": [
+    "moysklad",
+    "router"
+  ],
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "sinon-chai": "^2.6.0"
+  },
+  "author": "Vitaliy V. Makeev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wmakeev/moysklad-router/issues"
+  },
+  "homepage": "https://github.com/wmakeev/moysklad-router",
+  "dependencies": {
+    "event-emitter": "^0.3.3",
+    "lodash.assign": "^3.1.0",
+    "lodash.clonedeep": "^3.0.0",
+    "lodash.defaults": "^3.1.1"
+  }
+}
+
+},{}],53:[function(require,module,exports){
 /**
  * build-query-string
  * Date: 02.05.15
@@ -2283,7 +2319,7 @@ module.exports = function buildQueryString (data, isQuery) {
     }
     return queryString.join('&');
 };
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 /**
  * build-url
  * Date: 02.05.15
@@ -2315,12 +2351,14 @@ var buildUrl = function (state) {
 };
 
 module.exports = buildUrl;
-},{"./build-query-string":52}],54:[function(require,module,exports){
+},{"./build-query-string":53}],55:[function(require,module,exports){
 /**
  * index.js
  * Date: 12.03.15
  * Vitaliy V. Makeev (w.makeev@gmail.com)
  */
+
+var pkg = require('../package');
 
 var parseUrl = require('./parse-url'),
     buildUrl = require('./build-url'),
@@ -2361,6 +2399,8 @@ var Router = function (options) {
         router.navigate(route, isMod);
     };
 
+    router.VERSION = pkg.version;
+
     EventEmitter(router);
 
     router.checkUrl = checkUrl.bind(router);
@@ -2394,6 +2434,7 @@ var stop = function () {
     this.started = false;
     this.state = null;
     this.emit('stop', this);
+    return this;
 };
 
 var checkUrl = function (e) {
@@ -2401,26 +2442,28 @@ var checkUrl = function (e) {
     this.emit('route', cloneDeep(this.state), this);
 };
 
-var navigate = function (state, isMod) {
+var navigate = function (state, isPatch) {
     if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
-    var _state = _updateState(cloneDeep(state), this.getState(), isMod);
+    var _state = _updateState(cloneDeep(state), this.getState(), isPatch);
     window.location = buildUrl(_state);
     return this;
 };
 
-var replaceState = function (state, isMod) {
+var replaceState = function (state, isPatch) {
     if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
-    var _state = _updateState(cloneDeep(state), this.getState(), isMod);
+    var _state = _updateState(cloneDeep(state), this.getState(), isPatch);
     history.replaceState(null, null, buildUrl(_state));
     return this;
 };
 
 var refresh = function () {
+    //TODO Restore window.scroll after refresh
     this.replaceState({
         query: {
             refresh: +(new Date)
         }
-    }, true)
+    }, true);
+    return this;
 };
 
 var getHashPath = function () {
@@ -2434,7 +2477,7 @@ var getState = function () {
 };
 
 module.exports = Router;
-},{"./build-url":53,"./parse-url":56,"event-emitter":2,"lodash.assign":17,"lodash.clonedeep":28,"lodash.defaults":40}],55:[function(require,module,exports){
+},{"../package":52,"./build-url":54,"./parse-url":57,"event-emitter":2,"lodash.assign":17,"lodash.clonedeep":28,"lodash.defaults":40}],56:[function(require,module,exports){
 /**
  * parse-query-string
  * Date: 02.05.15
@@ -2459,7 +2502,7 @@ module.exports = function parseQueryString(queryString) {
     }
     return queryParams;
 };
-},{}],56:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 /**
  * parse
  * Date: 13.03.15
@@ -2494,5 +2537,5 @@ var parseUrl = function (url) {
 };
 
 module.exports = parseUrl;
-},{"./parse-query-string":55}]},{},[1])(1)
+},{"./parse-query-string":56}]},{},[1])(1)
 });
