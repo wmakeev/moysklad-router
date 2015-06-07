@@ -80,6 +80,7 @@ var stop = function () {
     this.started = false;
     this.state = null;
     this.emit('stop', this);
+    return this;
 };
 
 var checkUrl = function (e) {
@@ -87,26 +88,28 @@ var checkUrl = function (e) {
     this.emit('route', cloneDeep(this.state), this);
 };
 
-var navigate = function (state, isMod) {
+var navigate = function (state, isPatch) {
     if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
-    var _state = _updateState(cloneDeep(state), this.getState(), isMod);
+    var _state = _updateState(cloneDeep(state), this.getState(), isPatch);
     window.location = buildUrl(_state);
     return this;
 };
 
-var replaceState = function (state, isMod) {
+var replaceState = function (state, isPatch) {
     if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
-    var _state = _updateState(cloneDeep(state), this.getState(), isMod);
+    var _state = _updateState(cloneDeep(state), this.getState(), isPatch);
     history.replaceState(null, null, buildUrl(_state));
     return this;
 };
 
 var refresh = function () {
+    //TODO Restore window.scroll after refresh
     this.replaceState({
         query: {
             refresh: +(new Date)
         }
-    }, true)
+    }, true);
+    return this;
 };
 
 var getHashPath = function () {
