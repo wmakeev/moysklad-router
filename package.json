@@ -1,7 +1,7 @@
 {
   "name": "moysklad-router",
-  "version": "0.1.1-beta.1",
-  "description": "Разбор и создание строки url приложения МойСклад",
+  "version": "0.1.2",
+  "description": "Взаимодействие с url приложения МойСклад",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
