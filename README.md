@@ -11,17 +11,15 @@ moysklad-router
 var router = MoyskladRouter();
 ```
 
-###  router.start()
+### router.start() : this
 **Включает отслеживание текущего состояния.**
 
-#### returns `this`
 
-###  router.stop()
+### router.stop() : this
 **Выключает отслеживание состояния.**
 
-#### returns `this`
 
-###  router.getState()
+### router.getState() : Object
 **Возвращает копию текущего состояния.**
 
 Пример url состояния для раздела "Отгрузки" с примененным фильтром "Проведенные отгрузки с 01.06.2015 00:00":
@@ -64,9 +62,8 @@ https://online.moysklad.ru/app/#demand/edit?id=0f698528-0b8d-11e5-7a40-e897000af
 }
 ```
 
-#### returns `Object`
 
-###  router.navigate(state, [isPatch=false])
+### router.navigate(state, [isPatch=false]) : this
 **Перенаправление приложения в новое состояние.**
 
 `state` - объект описывающий новое состояние
@@ -88,24 +85,20 @@ router.navigate({
 }, true)
 ```
 
-#### returns `this`
 
-###  router.replaceState(state, [isPatch=false])
+### router.replaceState(state, [isPatch=false]) : this
 **Замена текущего состояния приложения.**
 
 Аналогично `router.navigate`, за тем исключением, что для установки состояния используется метод `history.replaceState`
 
-#### returns `this`
 
-
-###  router.refresh()
+### router.refresh() : this
 **Обновление текущей страницы приложения (без перезагрузки).**
 
 Добавляет в hash активного состояния приложения	ключ `refresh` с числовым значением текущего времени, тем самым заставляя приложение МойСклад обновить страницу. 
 
-#### returns `this`
 
-###  router.getHashPath()
+### router.getHashPath() : String
 **Возвращает `path` для текущего #hash.**
 
 ```js
@@ -113,7 +106,6 @@ router.getHashPath()
 // → 'customerorder/edit'
 ```
 
-#### returns `String`
 
 ## События `router`
 
