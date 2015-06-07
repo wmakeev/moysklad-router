@@ -5,6 +5,12 @@ moysklad-router
 
 ## Использование
 
+### Создание экземпляра
+
+```js
+var router = MoyskladRouter();
+```
+
 ###  router.start()
 Включает отслеживание текущего состояния.
 
