@@ -1,125 +1,150 @@
-/**
- * index.js
- * Date: 12.03.15
- * Vitaliy V. Makeev (w.makeev@gmail.com)
- */
-
-var pkg = require('../package');
-
-var parseUrl = require('./parse-url'),
-    buildUrl = require('./build-url'),
+var parseHash    = require('./parse-hash'),
+    buildUrl     = require('./build-url'),
     EventEmitter = require('event-emitter'),
-    cloneDeep = require('lodash.clonedeep'),
-    defaults = require('lodash.defaults'),
-    assign = require('lodash.assign');
+    cloneDeep    = require('lodash').cloneDeep,
+    defaults     = require('lodash').defaults,
+    assign       = require('lodash').assign;
 
-var _customizer = function (objectValue, sourceValue) {
-    if (sourceValue === void 0) return objectValue;
+//var pkg = require('../package');
 
-    else if (
-        (typeof objectValue === 'object' && !(objectValue instanceof Array)) &&
-        (typeof sourceValue === 'object' && !(sourceValue instanceof Array))
-    ) return assign(objectValue, sourceValue, _customizer);
+function deepAssignCustomizer(objectValue, sourceValue) {
+  if (sourceValue === void 0) return objectValue;
 
-    else return sourceValue;
-};
+  else if (
+    (typeof objectValue === 'object' && !(objectValue instanceof Array)) &&
+    (typeof sourceValue === 'object' && !(sourceValue instanceof Array))
+  ) return assign(objectValue, sourceValue, deepAssignCustomizer);
 
-var _updateState = function (newState, oldState, isMod) {
-    if (isMod)
-        return assign(oldState, newState, _customizer);
-    else
-        return defaults(newState, {
-            host: oldState.host,
-            app: oldState.app,
-            queryString: oldState.queryString
-        });
-};
+  else return sourceValue;
+}
+
+function updateState(newState, oldState, isMod) {
+  if (isMod)
+    return assign(oldState, newState, deepAssignCustomizer);
+  else
+    return defaults(newState, {
+      host: oldState.host,
+      app: oldState.app,
+      queryString: oldState.queryString
+    });
+}
+
+function parseNavigateArgs(arguments) {
+  var args = Array.prototype.slice.call(arguments, 0);
+  var state = {};
+  if (typeof args[0] === 'string') {
+    state.path = args.shift();
+    if (typeof args[0] === 'string') {
+      state.query = { id: args.shift() }
+    }
+    else if (typeof args[0] === 'object') {
+      state.query = args.shift()
+    }
+  }
+  else if (typeof args[0] === 'object') {
+    state = args.shift();
+  }
+  else {
+    throw new Error('Incorrect navigate arguments')
+  }
+  return {
+    state: state,
+    isPatch: args.shift()
+  }
+}
 
 /**
  * Creates new router
  * @constructor
  * @param {Object} options
  */
-var Router = function (options) {
-    var router = function (route, isMod) {
-        router.navigate(route, isMod);
-    };
+function Router(options) {
+  var router = function (route, isMod) {
+    router.navigate(route, isMod);
+  };
 
-    router.VERSION = pkg.version;
+  //router.VERSION = pkg.version;
 
-    EventEmitter(router);
+  EventEmitter(router);
 
-    router.checkUrl = checkUrl.bind(router);
-    router.start = start;
-    router.stop = stop;
-    router.navigate = navigate;
-    router.replaceState = replaceState;
-    router.refresh = refresh;
-    router.getState = getState;
-    router.getHashPath = getHashPath;
-    router.state = null;
+  router.checkUrl = checkUrl.bind(router);
+  router.start = start;
+  router.stop = stop;
+  router.navigate = navigate;
+  router.replaceState = replaceState;
+  router.refresh = refresh;
+  router.getState = getState;
+  router.getSection = getSection;
+  router.getAction = getAction;
+  router.state = null;
 
-    return router;
-};
+  return router;
+}
 
-var start = function () {
-    if (window && "onhashchange" in window) {
-        window.addEventListener("hashchange", this.checkUrl, false);
-        this.started = true;
-        this.emit('start', this);
-        this.checkUrl({
-            newURL: window.location.href,
-            oldURL: undefined
-        });
-    } else throw new Error('The browser not supports the hashchange event!');
-    return this;
-};
+function start() {
+  if (window && "onhashchange" in window) {
+    window.addEventListener("hashchange", this.checkUrl, false);
+    this.started = true;
+    this.checkUrl();
+    this.emit('start', this);
+  } else throw new Error('The browser not supports the hashchange event!');
+  return this;
+}
 
-var stop = function () {
-    window.removeEventListener("hashchange", this.checkUrl);
-    this.started = false;
-    this.state = null;
-    this.emit('stop', this);
-    return this;
-};
+function stop() {
+  window.removeEventListener("hashchange", this.checkUrl);
+  this.started = false;
+  this.state = null;
+  this.emit('stop', this);
+  return this;
+}
 
-var checkUrl = function (e) {
-    this.state = parseUrl(e.newURL);
-    this.emit('route', cloneDeep(this.state), this);
-};
+function checkUrl() {
+  this.state = parseHash(window.location.hash);
+  this.emit('route', cloneDeep(this.state), this);
+}
 
-var navigate = function (state, isPatch) {
-    if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
-    var _state = _updateState(cloneDeep(state), this.getState(), isPatch);
-    window.location = buildUrl(_state);
-    return this;
-};
+function navigate() {
+  if (!this.started) {
+    throw new Error('Роутер не запущен. Используйте router.start()');
+  }
+  var args = parseNavigateArgs(arguments);
+  var newState = updateState(cloneDeep(args.state), this.getState(), args.isPatch);
+  window.location = buildUrl(newState);
+  return this;
+}
 
-var replaceState = function (state, isPatch) {
-    if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
-    var _state = _updateState(cloneDeep(state), this.getState(), isPatch);
-    history.replaceState(null, null, buildUrl(_state));
-    return this;
-};
+function replaceState(state, isPatch) {
+  if (!this.started) {
+    throw new Error('Роутер не запущен. Используйте router.start()');
+  }
+  var args = parseNavigateArgs(arguments);
+  var newState = updateState(cloneDeep(args.state), this.getState(), args.isPatch);
+  history.replaceState(null, null, buildUrl(newState));
+  return this;
+}
 
-var refresh = function () {
-    //TODO Restore window.scroll after refresh
-    this.replaceState({
-        query: {
-            refresh: +(new Date)
-        }
-    }, true);
-    return this;
-};
+function refresh() {
+  //TODO Restore window.scroll after refresh
+  this.replaceState({
+    query: {
+      refresh: +(new Date)
+    }
+  }, true);
+  return this;
+}
 
-var getHashPath = function () {
-    var _state = this.getState();
-    return _state.section + (_state.action ? '/' + _state.action : '');
-};
+function getState() {
+  if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
+  return cloneDeep(this.state);
+}
 
-var getState = function () {
-    if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
-    return cloneDeep(this.state);
-};
+function getSection() {
+  return this.state.path.split('/')[0]
+}
+
+function getAction() {
+  return this.state.path.split('/')[1]
+}
 
 module.exports = Router;

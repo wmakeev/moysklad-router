@@ -1,2 +1,4 @@
 --reporter spec
-spec/*.spec.js
+--recursive
+test/nodeSetup.js
+src/*.spec.js

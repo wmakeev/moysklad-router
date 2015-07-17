@@ -1,25 +1,22 @@
 {
   "name": "moysklad-router",
-  "version": "0.1.2",
+  "version": "0.3.0",
   "description": "Взаимодействие с url приложения МойСклад",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify index.js -o dist/moysklad-router.js -s MoyskladRouter"
+    "test": "mocha",
+    "build": "multidep --export ",
+    "_build": "browserify src/index.js -o dist/moysklad-router.js -s MoyskladRouter"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/wmakeev/moysklad-router"
   },
+  "author": "Vitaliy V. Makeev",
   "keywords": [
     "moysklad",
     "router"
   ],
-  "devDependencies": {
-    "chai": "^1.10.0",
-    "sinon-chai": "^2.6.0"
-  },
-  "author": "Vitaliy V. Makeev",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/wmakeev/moysklad-router/issues"
@@ -27,8 +24,10 @@
   "homepage": "https://github.com/wmakeev/moysklad-router",
   "dependencies": {
     "event-emitter": "^0.3.3",
-    "lodash.assign": "^3.1.0",
-    "lodash.clonedeep": "^3.0.0",
-    "lodash.defaults": "^3.1.1"
+    "lodash": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "sinon-chai": "^2.6.0"
   }
 }

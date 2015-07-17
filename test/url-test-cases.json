@@ -1,73 +1,11 @@
 [
   {
     "urls": [
-      "https://online.moysklad.ru",
-      "https://online.moysklad.ru/",
-      "https://online.moysklad.ru/#"
-    ],
-    "result": {
-      "host": "online.moysklad.ru",
-      "queryString": {},
-      "query": {}
-    }
-  },
-  {
-    "url": "https://online.moysklad.ru/?returnPath=%2Fapp%2F",
-    "result": {
-      "host": "online.moysklad.ru",
-      "queryString": {
-        "returnPath": "/app/"
-      },
-      "query": {}
-    }
-  },
-  {
-    "url": "https://online.moysklad.ru/?foo=value&bar",
-    "result": {
-      "host": "online.moysklad.ru",
-      "queryString": {
-        "foo": "value",
-        "bar": null
-      },
-      "query": {}
-    }
-  },
-  {
-    "urls": [
-      "https://online.moysklad.ru/app",
-      "https://online.moysklad.ru/app/",
-      "https://online.moysklad.ru/app/#"
-    ],
-    "result": {
-      "host": "online.moysklad.ru",
-      "app": "app",
-      "queryString": {},
-      "query": {}
-    }
-  },
-  {
-    "urls": [
-      "https://online.moysklad.ru/app/admin",
-      "https://online.moysklad.ru/app/admin/",
-      "https://online.moysklad.ru/app/admin/#"
-    ],
-    "result": {
-      "host": "online.moysklad.ru",
-      "app": "app/admin",
-      "queryString": {},
-      "query": {}
-    }
-  },
-  {
-    "urls": [
       "https://online.moysklad.ru/app/admin/#mycompany",
       "https://online.moysklad.ru/app/admin/#mycompany/"
     ],
     "result": {
-      "host": "online.moysklad.ru",
-      "app": "app/admin",
-      "queryString": {},
-      "section": "mycompany",
+      "path": "mycompany",
       "query": {}
     }
   },
@@ -77,21 +15,14 @@
       "https://online.moysklad.ru/app/#mycompany/edit/"
     ],
     "result": {
-      "host": "online.moysklad.ru",
-      "app": "app",
-      "queryString": {},
-      "section": "mycompany",
-      "action": "edit",
+      "path": "mycompany/edit",
       "query": {}
     }
   },
   {
     "url": "https://online.moysklad.ru/app/admin/#custom_ae3b-64?sort=o.name%20a",
     "result": {
-      "host": "online.moysklad.ru",
-      "app": "app/admin",
-      "queryString": {},
-      "section": "custom_ae3b-64",
+      "path": "custom_ae3b-64",
       "query": {
         "sort": "o.name a"
       }
@@ -100,11 +31,7 @@
   {
     "url": "https://online.moysklad.ru/app/#custom_ae3b-64/view?sort=o.name%20a",
     "result": {
-      "host": "online.moysklad.ru",
-      "app": "app",
-      "queryString": {},
-      "section": "custom_ae3b-64",
-      "action": "view",
+      "path": "custom_ae3b-64/view",
       "query": {
         "sort": "o.name a"
       }
@@ -113,7 +40,7 @@
   {
     "url": "https://online.moysklad.ru/app/#customerorder?global_periodFilter=01.03.2015%2000:00:00,02.03.2015%2023:59:00&global_operationApprovalState=0&global_operationPrintedFilter=1&global_stateFilter=12e951a3-6520-41f8-9887-1d5a00f9ca9e,%D0%9D%D0%B0%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%20%D0%BA%20%D0%BE%D1%82%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B5,0900,State&global_employeeFilter=3bf340db-b6b5-4bf1-9271-2d75300df8e4,eshop@vensi-shop,,Employee&global_responsibleFilter=c1c5f299-ad7a-11e2-9a10-001b21d91495,Support,,Employee&global_agentTargetFilter=bf6bc7ce-444e-4fd2-9826-3134ce89c33b,00%20-%20%D0%9D%D0%BE%D0%B2%D0%B8%D0%BA%D0%BE%D0%B2%20%D0%90.%D0%A1.,NA,MyCompany,d08721d6-e7e1-11e3-ee70-002590a28eca,%D0%9D%D0%B0%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B5,,AgentAccount&global_storeFilter=6deeb985-0244-4ba9-88e5-d391b5f42c16,01%20%D0%97%D0%BE%D0%BD%D0%B0%20%D0%BE%D1%82%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B8,,Warehouse&global_projectFilter=f4d6e634-2e4a-4126-81bc-e0d64e593f87,Fashionset,,Project&global_agentSourceFilter=a81e27f2-1b56-11e3-9c91-7054d21a8d1e,%D0%9C%D0%B0%D1%80%D0%B8%D0%BD%D0%B0%20%D0%A2%D0%A0%20/%20%D0%91%D0%B5%D0%BD%D0%BB%D1%83%D0%BD%D0%B0,TR-M,Company&global_agentSourceFilter_tag=%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82%20%D1%81%D0%B0%D0%B9%D1%82&global_contractFilter=6d316720-b130-11e4-90a2-8ecb00097464,NA-cnt-00146/%D0%9A,,Contract&global_paymentStatusFilter=paid,&global_customerOrderShippingStatusFilter=unshipped,&global_deliveryPeriodFilter=04.03.2015%2000:00:00,&global_goodIdFilter=73d1854d-2e97-11e4-44cd-002590a28eca,%D0%A1%D1%83%D0%BC%D0%BA%D0%B0%20%D0%B6%D0%B5%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20Benluna%20(809-201%20D.COFFEE)%20%238050,8050,Good&48a9dbca-75f3-4f1c-933b-57df18b5169f=55e6f545-b41f-4a72-8b85-363058b68598,%D0%97%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B5%D0%BD%D0%BE,,CustomEntity&c24b7296-1f0a-11e3-0677-7054d21a8d1e=3c7ff0c0-239d-11e3-0b96-7054d21a8d1e,%D0%9D%D0%B5%20%D1%81%D0%BE%D0%B1%D1%80%D0%B0%D0%BD,100,CustomEntity&0067d0e1-bfb7-4f26-aa6a-b54ad64cc633=1ef65acc-5b6b-49ae-a299-2db10b270ecc,(%D0%BD%D0%B5%D1%82%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%BE%D0%B2),,CustomEntity&65e3e755-c83d-458d-9997-879153708f94=1234&c271f954-0a90-44d9-8652-5b9a864a3bf3=,20.03.2015%2023:59:00&ea8a56b1-9653-42bf-8ee8-1c5596c678f3=7890&159443fe-d1b4-45f8-af24-b28c5c8549a7=10.03.2015%2000:00:00,&48493d60-2e76-4fad-9dfb-b9bbe0bb1c16=4567",
     "result": {
-      "app": "app",
+      "path": "customerorder",
       "query": {
         "0067d0e1-bfb7-4f26-aa6a-b54ad64cc633": [
           "1ef65acc-5b6b-49ae-a299-2db10b270ecc",
@@ -221,10 +148,7 @@
           "",
           "Warehouse"
         ]
-      },
-      "section": "customerorder",
-      "host": "online.moysklad.ru",
-      "queryString": {}
+      }
     }
   }
 ]
