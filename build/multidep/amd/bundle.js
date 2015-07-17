@@ -1,4 +1,4 @@
-define("moysklad-router@0.3.0", ["multiver!lodash@^3.0.0","multiver!event-emitter@^0.3.3"], function() {
+define(["multiver!lodash@^3.0.0","multiver!event-emitter@^0.3.3"], function() {
   var global = window;
   var __global_require__ = require;
   var __args__ = arguments;

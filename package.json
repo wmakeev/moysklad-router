@@ -1,11 +1,11 @@
 {
   "name": "moysklad-router",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Взаимодействие с url приложения МойСклад",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha",
-    "build": "multidep --export ",
+    "build": "multidep --export",
     "_build": "browserify src/index.js -o dist/moysklad-router.js -s MoyskladRouter"
   },
   "repository": {
