@@ -128,6 +128,16 @@ router.navigate({
 Реализуется через добавление в hash url ключа `refresh` с числовым значением текущего времени, тем самым заставляя МойСклад обновить страницу.
 
 
+### router.getPath() : String
+**Возвращает текущий `path` состояния**
+
+```js
+// #customerorder/edit?id=123-456-789
+
+router.getPath()
+// → 'customerorder/edit'
+```
+
 ### router.getSection() : String
 **Возвращает текущий раздел**
 
@@ -146,6 +156,16 @@ router.getSection()
 
 router.getAction() 
 // → 'edit'
+```
+
+### router.getQuery() : Object
+**Возвращает текущий `query` состояния**
+
+```js
+// #customerorder/edit?id=123-456-789
+
+router.getQuery()
+// → { id: '123-456-789' }
 ```
 
 

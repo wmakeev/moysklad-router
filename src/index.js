@@ -53,6 +53,11 @@ function parseNavigateArgs(arguments) {
   }
 }
 
+function ensureStarted(router) {
+  if (!router.started) throw new Error('Роутер не запущен. Используйте router.start()');
+}
+
+
 /**
  * Creates new router
  * @constructor
@@ -74,8 +79,10 @@ function Router(options) {
   router.replaceState = replaceState;
   router.refresh = refresh;
   router.getState = getState;
+  router.getPath = getPath;
   router.getSection = getSection;
   router.getAction = getAction;
+  router.getQuery = getQuery;
   router.state = null;
 
   return router;
@@ -105,9 +112,7 @@ function checkUrl() {
 }
 
 function navigate() {
-  if (!this.started) {
-    throw new Error('Роутер не запущен. Используйте router.start()');
-  }
+  ensureStarted(this);
   var args = parseNavigateArgs(arguments);
   var newState = updateState(cloneDeep(args.state), this.getState(), args.isPatch);
   window.location = buildUrl(newState);
@@ -115,9 +120,7 @@ function navigate() {
 }
 
 function replaceState(state, isPatch) {
-  if (!this.started) {
-    throw new Error('Роутер не запущен. Используйте router.start()');
-  }
+  ensureStarted(this);
   var args = parseNavigateArgs(arguments);
   var newState = updateState(cloneDeep(args.state), this.getState(), args.isPatch);
   history.replaceState(null, null, buildUrl(newState));
@@ -135,15 +138,27 @@ function refresh() {
 }
 
 function getState() {
-  if (!this.started) throw new Error('Роутер не запущен. Используйте router.start()');
+  ensureStarted(this);
   return cloneDeep(this.state);
 }
 
+function getPath() {
+  ensureStarted(this);
+  return this.state.path;
+}
+
+function getQuery() {
+  ensureStarted(this);
+  return this.state.query;
+}
+
 function getSection() {
+  ensureStarted(this);
   return this.state.path.split('/')[0]
 }
 
 function getAction() {
+  ensureStarted(this);
   return this.state.path.split('/')[1]
 }
 

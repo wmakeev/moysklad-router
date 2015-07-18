@@ -34,52 +34,33 @@ describe('moysklad-router', function () {
       //  .to.be.ok.and
       //  .to.be.equal(pkg.version);
 
-      expect(this.router.start)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.start).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.stop)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.stop).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.checkUrl)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.checkUrl).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.navigate)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.navigate).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.replaceState)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.replaceState).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.refresh)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.refresh).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.getState)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.getState).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.getSection)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.getPath).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.getAction)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.getSection).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.state)
-        .to.be.eql(null);
+      expect(this.router.getAction).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.on)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.getQuery).to.be.ok.and.to.be.a('function');
 
-      expect(this.router.off)
-        .to.be.ok.and
-        .to.be.a('function');
+      expect(this.router.state).to.be.eql(null);
+
+      expect(this.router.on).to.be.ok.and.to.be.a('function');
+
+      expect(this.router.off).to.be.ok.and.to.be.a('function');
     });
 
     it('should throw error if no window.hashchange', function () {
@@ -198,6 +179,13 @@ describe('moysklad-router', function () {
       expect(state).not.to.be.equal(this.router.state);
     });
 
+    it('should return hash path', function () {
+      window.location.hash = '#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965';
+      this.router.start();
+      expect(this.router.getPath(), 'getPath')
+        .to.be.equal('customerorder/edit');
+    });
+
     it('should return hash section', function () {
       window.location.hash = '#customerorder/edit';
       this.router.start();
@@ -210,6 +198,13 @@ describe('moysklad-router', function () {
       this.router.start();
       expect(this.router.getAction(), 'getAction')
         .to.be.equal('edit');
+    });
+
+    it('should return hash query', function () {
+      window.location.hash = '#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965';
+      this.router.start();
+      expect(this.router.getQuery(), 'getQuery')
+        .to.be.eql({ id: '2642131c-2add-11e5-90a2-8ecb0006c965' });
     });
 
     //TODO replaceState

@@ -1,12 +1,11 @@
 {
   "name": "moysklad-router",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Взаимодействие с url приложения МойСклад",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha",
-    "build": "multidep --export",
-    "_build": "browserify src/index.js -o dist/moysklad-router.js -s MoyskladRouter"
+    "build": "multidep --export"
   },
   "repository": {
     "type": "git",
@@ -28,6 +27,7 @@
   },
   "devDependencies": {
     "chai": "^1.10.0",
+    "sinon": "^1.13.0",
     "sinon-chai": "^2.6.0"
   }
 }
