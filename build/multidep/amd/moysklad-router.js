@@ -1,6 +1,6 @@
+// Build time: Wed Jul 22 2015 17:26:42 GMT+0500 (UZT)
 define(["multiver!lodash@^3.0.0","multiver!event-emitter@^0.3.3"], function() {
   var global = window;
-  var __global_require__ = require;
   var __args__ = arguments;
   var require = (function() {
     var deps = ["lodash@^3.0.0","event-emitter@^0.3.3"].reduce(function(res, dep, index) {
@@ -10,8 +10,6 @@ define(["multiver!lodash@^3.0.0","multiver!event-emitter@^0.3.3"], function() {
     return function(name) {
       if (name in deps) {
         return __args__[deps[name]];
-      } else if (__global_require__) {
-        return __global_require__(name);
       } else {
         var err = new Error("Cannot find module '" + name + "'");
         err.code = 'MODULE_NOT_FOUND';
@@ -286,14 +284,12 @@ define(["multiver!lodash@^3.0.0","multiver!event-emitter@^0.3.3"], function() {
 
 	var buildQueryString = __webpack_require__(5);
 
-	var location = window.location;
-
 	module.exports = function buildUrl(state) {
 	  var url = [
-	    location.protocol,
+	    window.location.protocol,
 	    '//',
-	    location.hostname,
-	    location.pathname
+	    window.location.hostname,
+	    window.location.pathname
 	    // TODO Query string
 	  ].join('');
 

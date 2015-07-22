@@ -1,13 +1,11 @@
 var buildQueryString = require('./build-query-string');
 
-var location = window.location;
-
 module.exports = function buildUrl(state) {
   var url = [
-    location.protocol,
+    window.location.protocol,
     '//',
-    location.hostname,
-    location.pathname
+    window.location.hostname,
+    window.location.pathname
     // TODO Query string
   ].join('');
 
