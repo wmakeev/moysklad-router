@@ -5,6 +5,20 @@ moysklad-router
 
 ## Использование
 
+- [Создание экземпляра](#Создание-экземпляра)
+- [router.start() : this](#routerstart--this)
+- [router.stop() : this](#routerstop--this)
+- [router.getState() : Object](#routergetstate--object)
+- [router.navigate(state, [isPatch=false]) : this](#routernavigatestate-ispatchfalse--this)
+- [router.navigate(path, [query|uuid], [isPatch=false]) : this](#routernavigatepath-queryuuid-ispatchfalse--this)
+- [router.replaceState(args...) : this](#routerreplacestateargs--this)
+- [router.refresh() : this](#routerrefresh--this)
+- [router.getPath() : String](#routergetpath--string)
+- [router.getSection() : String](#routergetsection--string)
+- [router.getAction() : String](#routergetaction--string)
+- [router.getQuery() : Object](#routergetquery--object)
+- [События](#События-router)
+
 ### Создание экземпляра
 
 ```js
