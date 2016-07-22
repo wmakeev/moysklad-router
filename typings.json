@@ -1,0 +1,9 @@
+{
+  "name": "moysklad-router",
+  "dependencies": {},
+  "globalDependencies": {
+    "blue-tape": "registry:dt/blue-tape#0.1.11+20160316155526",
+    "node": "registry:env/node#6.0.0+20160720180515",
+    "tape": "registry:dt/tape#4.2.2+20160317120654"
+  }
+}

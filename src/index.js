@@ -1,11 +1,9 @@
 var parseHash    = require('./parse-hash'),
     buildUrl     = require('./build-url'),
     EventEmitter = require('event-emitter'),
-    cloneDeep    = require('lodash').cloneDeep,
-    defaults     = require('lodash').defaults,
-    assign       = require('lodash').assign;
-
-//var pkg = require('../package');
+    cloneDeep    = require('lodash.cloneDeep'),
+    defaults     = require('lodash.defaults'),
+    assign       = require('lodash.assign');
 
 function deepAssignCustomizer(objectValue, sourceValue) {
   if (sourceValue === void 0) return objectValue;
@@ -68,7 +66,7 @@ function Router(options) {
     router.navigate(route, isMod);
   };
 
-  //router.VERSION = pkg.version;
+  router.VERSION = '/** router.VERSION **/';
 
   EventEmitter(router);
 

@@ -1,4 +1,0 @@
---reporter spec
---recursive
-test/nodeSetup.js
-src/*.spec.js

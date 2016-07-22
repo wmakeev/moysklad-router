@@ -213,9 +213,9 @@ describe('moysklad-router', function () {
       window.location.hash = '#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965';
       this.router.start();
       this.router.refresh();
-      var url = history.replaceState.getCall(0).args[2].split('&refresh=');
-      expect(url[0]).to.be.equal('https://online.moysklad.ru/app/#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965');
-      expect(url[1].length).to.be.equal('1436969168623'.length);
+      var url = history.replaceState.getCall(0).args[2];
+      expect(url).to.be.equal('https://online.moysklad.ru/app/#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965&refresh=1436969168623');
+
     });
 
 

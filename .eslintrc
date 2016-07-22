@@ -1,0 +1,21 @@
+{
+  "extends": "standard",
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    "valid-jsdoc": ["warn"],
+    "max-len": ["error", 100],
+    "arrow-parens": 0,
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "no-shadow": ["error", {
+      "builtinGlobals": true, "hoist": "all", "allow": [
+        "cb", "done", "resolve", "reject", "t"
+      ]
+    }],
+    "no-use-before-define": ["error", { "functions": true, "classes": true }],
+    "no-inner-declarations": [2, "both"],
+    "vars-on-top": 2
+  }
+}

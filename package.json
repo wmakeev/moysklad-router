@@ -4,7 +4,7 @@
   "description": "Взаимодействие с url приложения МойСклад",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "node ./test | tap-difflet",
     "build": "multidep --export"
   },
   "repository": {
@@ -23,11 +23,14 @@
   "homepage": "https://github.com/wmakeev/moysklad-router",
   "dependencies": {
     "event-emitter": "^0.3.3",
-    "lodash": "^3.0.0"
+    "lodash.assign": "^4.0.9",
+    "lodash.clonedeep": "^4.3.2",
+    "lodash.defaults": "^4.0.1"
   },
   "devDependencies": {
-    "chai": "^1.10.0",
+    "blue-tape": "^0.2.0",
     "sinon": "^1.13.0",
-    "sinon-chai": "^2.6.0"
+    "tap-difflet": "^0.6.0",
+    "walkdir": "0.0.11"
   }
 }
