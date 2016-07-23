@@ -1,6 +1,7 @@
 'use strict'
 
 const test = require('blue-tape')
+const assign = require('lodash.assign')
 const sinon = require('sinon')
 const Router = require('../index')
 
@@ -20,26 +21,27 @@ const setup = () => {
     replaceState: sinon.spy()
   }
 
-  return { router: Router() }
+  return { router: Router(), window: global.window }
 }
 
 const teardown = () => {
   delete global.window
+  delete global.history
 }
 
-test('moysklad-router', t => {
+test('router', t => {
   t.equal(typeof Router, 'function', 'to be function')
   t.end()
 })
 
-test('moysklad-router instance', t => {
+test('router instance', t => {
   let router = Router()
   t.ok(router, 'is defined')
   t.equal(router.state, null, 'state is null')
   t.end()
 })
 
-test('moysklad-router instance have methods', t => {
+test('router instance have', t => {
   let router = Router()
   let methods = [
     'start', 'stop', 'checkUrl', 'navigate', 'replaceState', 'refresh', 'getState',
@@ -50,9 +52,42 @@ test('moysklad-router instance have methods', t => {
   t.end()
 })
 
-test('moysklad-router start throw error if no window.hashchange', t => {
-  let router = setup().router
-  t.throws(router.start.bind(this.router), 'The browser not supports the hashchange event')
+test('router start throw error if no window.onhashchange', t => {
+  let { router, window: win } = setup()
+  delete win.onhashchange
+  t.throws(router.start.bind(router), 'The browser not supports the hashchange event')
+  teardown()
+  t.end()
+})
+
+test('router start not throw if window.onhashchange exist', t => {
+  let { router } = setup()
+  t.doesNotThrow(router.start.bind(router))
+  teardown()
+  t.end()
+})
+
+test('router add and remove checkUrl event listener to hashchange event', t => {
+  let { router, window: win } = setup()
+
+  assign(win.location, {
+    hash: '#warehouse/edit'
+  })
+
+  router.start()
+
+  t.ok(win.addEventListener
+    .calledWithExactly("hashchange", this.router.checkUrl, false)
+
+  expect(router, 'router').property('state').to.be.ok;
+  expect(router, 'router')
+    .deep.property('state.path').to.be.equal('warehouse/edit');
+
+  this.router.stop();
+  expect(global.window.removeEventListener)
+    .to.be.calledOnce.and
+    .calledWith("hashchange", this.router.checkUrl);
+
   teardown()
   t.end()
 })
