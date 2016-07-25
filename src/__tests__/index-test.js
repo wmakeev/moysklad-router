@@ -95,9 +95,24 @@ test('router call all route handlers on checkUrl', withSetup(({ assert, router }
   })
 }))
 
-// TODO 'should emit "start" event on router.start()'
+test('router emit "start" event on router.start()', withSetup(({ assert, router }) => {
+  router.on('start', r => {
+    assert.equal(r, router)
+    assert.end()
+  })
+  router.start()
+  return true
+}))
 
-// TODO 'should emit "stop" event on router.stop()'
+test('router emit "stop" event on router.stop()', withSetup(({ assert, router }) => {
+  router.on('stop', r => {
+    assert.equal(r, router)
+    assert.end()
+  })
+  router.start()
+  setTimeout(() => router.stop(), 0)
+  return true
+}))
 
 test('router navigate to path', withSetup(({ assert, router }) => {
   router.start()
@@ -168,7 +183,14 @@ test('router methods', withSetup(({ assert, router }) => {
     '#getQuery returns cloned router.state.query')
 }))
 
-// TODO test replaceState
+test('router#replaceState use history.replaceState', withSetup(({ assert, router }) => {
+  window.location.hash = '#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965'
+  router.start()
+  router.replaceState('company/view', { id: '5892131c-2add-11e5-90a2-8ecb0006c444' })
+  let url = history.replaceState.getCall(0).args[2]
+  assert.equal(url,
+    'https://online.moysklad.ru/app/#company/view?id=5892131c-2add-11e5-90a2-8ecb0006c444')
+}))
 
 test('router#refresh replaceState with addition refresh param', withSetup(({ assert, router }) => {
   window.location.hash = '#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965'
@@ -179,4 +201,17 @@ test('router#refresh replaceState with addition refresh param', withSetup(({ ass
   assert.ok(testExp.test(url))
 }))
 
-// TODO methods should return this
+test('router methods returns this', withSetup(({ assert, router }) => {
+  let r
+  window.location.hash = '#customerorder/edit?id=2642131c-2add-11e5-90a2-8ecb0006c965'
+  r = router.start()
+  assert.equal(r, router, 'start')
+  r = router.navigate('invoiceout')
+  assert.equal(r, router, 'navigate')
+  r = router.replaceState(router.getState())
+  assert.equal(r, router, 'replaceState')
+  r = router.refresh()
+  assert.equal(r, router, 'refresh')
+  r = router.stop()
+  assert.equal(r, router, 'stop')
+}))
