@@ -17,14 +17,10 @@ function deepAssignCustomizer(objectValue, sourceValue) {
 }
 
 function updateState(newState, oldState, isMod) {
-  if (isMod)
-    return assign(oldState, newState, deepAssignCustomizer);
+  if (isMod && oldState)
+    return assign(oldState, newState, deepAssignCustomizer)
   else
-    return defaults(newState, {
-      host: oldState.host,
-      app: oldState.app,
-      queryString: oldState.queryString
-    });
+    return newState
 }
 
 function parseNavigateArgs(arguments) {
@@ -147,7 +143,7 @@ function getPath() {
 
 function getQuery() {
   ensureStarted(this);
-  return this.state.query;
+  return this.getState().query;
 }
 
 function getSection() {
