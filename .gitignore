@@ -1,5 +1,6 @@
 # Loacal temp files
 _temp*
+_some
 
 # IDE
 .idea
