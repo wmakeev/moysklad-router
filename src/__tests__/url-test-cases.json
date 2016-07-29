@@ -34,7 +34,7 @@
     "result": {
       "path": "custom_ae3b-64",
       "query": {
-        "sort": "o.name a xxxx"
+        "sort": "o.name a"
       }
     }
   },
