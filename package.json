@@ -4,8 +4,8 @@
   "description": "Взаимодействие с url приложения МойСклад",
   "main": "src/index.js",
   "scripts": {
-    "test": "node ./test | tap-difflet",
-    "build": "multidep --export"
+    "_test": "node ./test | tap-difflet",
+    "coverage": "istanbul cover blue-tape -- src/**/__tests__/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,10 @@
   },
   "devDependencies": {
     "blue-tape": "^0.2.0",
+    "eslint": "^3.2.0",
+    "istanbul": "^0.4.4",
     "sinon": "^1.13.0",
+    "tap": "^6.2.0",
     "tap-difflet": "^0.6.0",
     "walkdir": "0.0.11"
   }
