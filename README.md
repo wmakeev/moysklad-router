@@ -1,7 +1,7 @@
 moysklad-router
 ===============
 
-[![npm](https://img.shields.io/npm/v/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/moysklad-router) [![Travis](https://img.shields.io/travis/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/wmakeev/moysklad-router) [![Coveralls](https://img.shields.io/coveralls/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/wmakeev/moysklad-router) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/) [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![npm](https://img.shields.io/npm/v/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/moysklad-router) [![Travis](https://img.shields.io/travis/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/wmakeev/moysklad-router) [![Coveralls](https://img.shields.io/coveralls/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/wmakeev/moysklad-router) [![Gemnasium](https://img.shields.io/gemnasium/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://gemnasium.com/github.com/wmakeev/moysklad-router) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 > Библиотека для управления текущим url приложения МойСклад.
 
