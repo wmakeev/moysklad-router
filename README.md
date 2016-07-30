@@ -1,7 +1,11 @@
 moysklad-router
 ===============
 
-Библиотека для управления текущим url приложения МойСклад.
+[![npm](https://img.shields.io/npm/v/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/moysklad-router) [![Travis](https://img.shields.io/travis/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/wmakeev/moysklad-router) [![Coveralls](https://img.shields.io/coveralls/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/wmakeev/moysklad-router) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/) [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+
+> Библиотека для управления текущим url приложения МойСклад.
+
+TODO https://github.com/RichardLitt/standard-readme/blob/master/spec.md
 
 ## Использование
 
@@ -65,7 +69,7 @@ https://online.moysklad.ru/app/#demand/edit?id=0f698528-0b8d-11e5-7a40-e897000af
 	path: 'demand/edit',
 	query: {
 		id: "0f698528-0b8d-11e5-7a40-e897000af75f"
-	}		
+	}
 }
 ```
 
@@ -78,7 +82,7 @@ https://online.moysklad.ru/app/#demand/edit?id=0f698528-0b8d-11e5-7a40-e897000af
 | `state`  | `Object` | объект описывающий новое состояние | обязательный
 | `isPatch`| `Boolean`| `true`, если необходимо частичное обновление состояния `query`. В этом случае значение параметра `state` накладывается на активное состояние приложения. | false
 
-Пример вызова: 
+Пример вызова:
 
 ```js
 var curState = router.getState();
@@ -86,7 +90,7 @@ curState.query.id = '0f698528-0b8d-11e5-7a40-e897000af75f';
 router.navigate(curState);
 ```
 
-аналогичная запись с флагом `isPatch` = `true` 
+аналогичная запись с флагом `isPatch` = `true`
 
 ```js
 router.navigate({
@@ -109,11 +113,11 @@ router.navigate({
 Все три вызова `navigate` показанные ниже аналогичны:
 
 ```js
-router.navigate({ 
-	path: 'customerorder/edit', 
+router.navigate({
+	path: 'customerorder/edit',
 	query: { id: uuid }
 });
-	
+
 router.navigate('customerorder/edit', uuid)
 
 router.navigate('customerorder/edit', { id: uuid })
@@ -122,7 +126,7 @@ router.navigate('customerorder/edit', { id: uuid })
 Если вы находитесь на странице редактирования заказа, то перейти к другому заказу можно следующим вызовом:
 
 ```js
-router.navigate({ 
+router.navigate({
 	query: { id: uuid }
 }, true);
 ```
@@ -158,7 +162,7 @@ router.getPath()
 ```js
 // #customerorder/edit
 
-router.getSection() 
+router.getSection()
 // → 'customerorder'
 ```
 
@@ -168,7 +172,7 @@ router.getSection()
 ```js
 // #customerorder/edit
 
-router.getAction() 
+router.getAction()
 // → 'edit'
 ```
 
@@ -188,10 +192,10 @@ router.getQuery()
 `router` реализует интерфейс `EventEmitter` и генерирует следующие события:
 
 - Запуск роутера
-  `router.on('start', (router) => {...})` 
+  `router.on('start', (router) => {...})`
 
 - Остановка роутера
-  `router.on('stop', (router) => {...})` 
-  
+  `router.on('stop', (router) => {...})`
+
 - Изменение текущего состояния
-  `router.on('route', (state, router) => {...})` 
+  `router.on('route', (state, router) => {...})`
