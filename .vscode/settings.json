@@ -3,5 +3,10 @@
   "editor.tabSize": 2,
   "editor.renderIndentGuides": true,
   "search.exclude": {},
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "search.exclude": {
+    "**/.nyc_output": true,
+    "**/.vscode": true,
+    "**/coverage": true
+  }
 }
