@@ -6,9 +6,10 @@
   "scripts": {
     "test": "node ./test | tap-difflet",
     "lint": "eslint src/**/*.js",
-    "coverage": "./node_modules/.bin/istanbul cover test",
+    "coverage": "./node_modules/.bin/istanbul cover ./test/index.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "coveralls-local": "cat ./coverage/lcov.info | node -r dotenv/config ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls-local": "cat ./coverage/lcov.info | node -r dotenv/config ./node_modules/coveralls/bin/coveralls.js",
+    "build": "npm run lint && npm run coverage && npm run coveralls"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/wmakeev/moysklad-router",
   "dependencies": {
     "event-emitter": "^0.3.3",
+    "have": "^0.4.0",
     "lodash.assign": "^4.0.9",
     "lodash.clonedeep": "^4.3.2"
   },
