@@ -1,32 +1,68 @@
 moysklad-router
 ===============
 
-[![npm](https://img.shields.io/npm/v/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/moysklad-router) [![Travis](https://img.shields.io/travis/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/wmakeev/moysklad-router) [![Coveralls](https://img.shields.io/coveralls/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/wmakeev/moysklad-router) [![Gemnasium](https://img.shields.io/gemnasium/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://gemnasium.com/github.com/wmakeev/moysklad-router) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
+[![npm](https://img.shields.io/npm/v/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://www.npmjs.com/package/moysklad-router)
+[![Travis](https://img.shields.io/travis/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/wmakeev/moysklad-router)
+[![Coveralls](https://img.shields.io/coveralls/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/wmakeev/moysklad-router)
+[![Gemnasium](https://img.shields.io/gemnasium/wmakeev/moysklad-router.svg?maxAge=2592000&style=flat-square)](https://gemnasium.com/github.com/wmakeev/moysklad-router)
+[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 > Библиотека для управления текущим url приложения МойСклад.
 
-TODO https://github.com/RichardLitt/standard-readme/blob/master/spec.md
+Набор методов для модификации, отлеживания состояния приложения МойСклад и генерация url.
+
+## Содержание
+
+- [Зачем?](#зачем)
+- [Установка](#установка)
+- [Использование](#использование)
+- [API](#api)
+	- [Создание экземпляра](#Создание-экземпляра)
+	- [router.start() : this](#routerstart--this)
+	- [router.stop() : this](#routerstop--this)
+	- [router.getState() : Object](#routergetstate--object)
+	- [router.navigate(state, isPatch=false) : this](#routernavigatestate-ispatchfalse--this)
+	- [router.navigate(path, query={} | uuid, isPatch=false) : this](#routernavigatepath-queryuuid-ispatchfalse--this)
+	- [router.replaceState(...args) : this](#routerreplacestateargs--this)
+	- [router.refresh() : this](#routerrefresh--this)
+	- [router.getPath() : String](#routergetpath--string)
+	- [router.getSection() : String](#routergetsection--string)
+	- [router.getAction() : String](#routergetaction--string)
+	- [router.getQuery() : Object](#routergetquery--object)
+	- [События](#События-router)
+- [License](#license)
+
+## Зачем?
+
+Роутер задумывался с целью облегчить задачу написания расширений для онлайн-приложения МойСклад. Часто необходимо знать в каком разделе сейчас находится пользователь, получить идентификатор теущего документа, перейти в нужный раздел или обновить данные на странице после изменений.
+
+## Установка
+
+```
+$ npm install moysklad-router
+```
 
 ## Использование
 
-- [Создание экземпляра](#Создание-экземпляра)
-- [router.start() : this](#routerstart--this)
-- [router.stop() : this](#routerstop--this)
-- [router.getState() : Object](#routergetstate--object)
-- [router.navigate(state, [isPatch=false]) : this](#routernavigatestate-ispatchfalse--this)
-- [router.navigate(path, [query|uuid], [isPatch=false]) : this](#routernavigatepath-queryuuid-ispatchfalse--this)
-- [router.replaceState(args...) : this](#routerreplacestateargs--this)
-- [router.refresh() : this](#routerrefresh--this)
-- [router.getPath() : String](#routergetpath--string)
-- [router.getSection() : String](#routergetsection--string)
-- [router.getAction() : String](#routergetaction--string)
-- [router.getQuery() : Object](#routergetquery--object)
-- [События](#События-router)
+Для работы с роутером небходимо подключить библиотеку отдельным скриптом либо использовать в составе сборки
+
+```js
+// Создаем экземпляр роутера
+let router = moyskladRouter()
+
+// Запускаем отслеживание состояния url
+router.start()
+
+// Переходим на страницу заказа покупателя
+router('customerorder/edit', '8ee87f6f-125e-11e3-a711-7054d21a8d1e')
+```
+
+## API
 
 ### Создание экземпляра
 
 ```js
-var router = MoyskladRouter();
+let router = moyskladRouter()
 ```
 
 ### router.start() : this
@@ -73,8 +109,9 @@ https://online.moysklad.ru/app/#demand/edit?id=0f698528-0b8d-11e5-7a40-e897000af
 }
 ```
 
+### router(...args) → router.navigate(...args)
 
-### router.navigate(state, [isPatch=false]) : this
+### router.navigate(state, isPatch=false) : this
 **Перенаправляет приложение в новое состояние (новое состояние добавляется в историю навигации браузера).**
 
 | Аргумент | Тип      | Описание | Значение по умолчанию
@@ -85,9 +122,9 @@ https://online.moysklad.ru/app/#demand/edit?id=0f698528-0b8d-11e5-7a40-e897000af
 Пример вызова:
 
 ```js
-var curState = router.getState();
-curState.query.id = '0f698528-0b8d-11e5-7a40-e897000af75f';
-router.navigate(curState);
+let curState = router.getState()
+curState.query.id = '0f698528-0b8d-11e5-7a40-e897000af75f'
+router.navigate(curState)
 ```
 
 аналогичная запись с флагом `isPatch` = `true`
@@ -100,7 +137,7 @@ router.navigate({
 }, true)
 ```
 
-### router.navigate(path, [query|uuid], [isPatch=false]) : this
+### router.navigate(path, query={} | uuid, isPatch=false) : this
 **Перенаправляет приложение в новое состояние (новое состояние добавляется в историю навигации браузера).**
 
 | Аргумент | Тип      | Описание | Значение по умолчанию
@@ -116,7 +153,7 @@ router.navigate({
 router.navigate({
 	path: 'customerorder/edit',
 	query: { id: uuid }
-});
+})
 
 router.navigate('customerorder/edit', uuid)
 
@@ -128,11 +165,11 @@ router.navigate('customerorder/edit', { id: uuid })
 ```js
 router.navigate({
 	query: { id: uuid }
-}, true);
+}, true)
 ```
 
 
-### router.replaceState(args...) : this
+### router.replaceState(...args) : this
 **Перенаправляет приложение в новое состояние (новое состояние НЕ добавляется в историю навигации браузера).**
 
 Вызов метода аналогичен вызову `router.navigate`, за тем исключением, что для установки состояния используется метод `history.replaceState` (т.е. не затрагивается история навигации).
@@ -141,7 +178,7 @@ router.navigate({
 ### router.refresh() : this
 **Обновляет текущую страницу приложения без перезагрузки.**
 
-Своего рода "хак", который позволяет реализовать обновление текущей страницы приложения МойСклад без перезагрузки страницы в браузере.
+Своего рода "хак", который позволяет реализовать обновление текущей страницы приложения МойСклад без перезагрузки и изменения истории навигации.
 
 Реализуется через добавление в hash url ключа `refresh` с числовым значением текущего времени, тем самым заставляя МойСклад обновить страницу.
 
@@ -152,8 +189,7 @@ router.navigate({
 ```js
 // #customerorder/edit?id=123-456-789
 
-router.getPath()
-// → 'customerorder/edit'
+router.getPath() // → 'customerorder/edit'
 ```
 
 ### router.getSection() : String
@@ -162,8 +198,7 @@ router.getPath()
 ```js
 // #customerorder/edit
 
-router.getSection()
-// → 'customerorder'
+router.getSection() // → 'customerorder'
 ```
 
 ### router.getAction() : String
@@ -172,8 +207,7 @@ router.getSection()
 ```js
 // #customerorder/edit
 
-router.getAction()
-// → 'edit'
+router.getAction() // → 'edit'
 ```
 
 ### router.getQuery() : Object
@@ -182,20 +216,22 @@ router.getAction()
 ```js
 // #customerorder/edit?id=123-456-789
 
-router.getQuery()
-// → { id: '123-456-789' }
+router.getQuery() // → { id: '123-456-789' }
 ```
 
 
-## События `router`
+### `router` Events
 
 `router` реализует интерфейс `EventEmitter` и генерирует следующие события:
 
 - Запуск роутера
-  `router.on('start', (router) => {...})`
+  `router.on('start', router => {...})`
 
 - Остановка роутера
-  `router.on('stop', (router) => {...})`
+  `router.on('stop', router => {...})`
 
 - Изменение текущего состояния
   `router.on('route', (state, router) => {...})`
+
+## License
+MIT @ Vitaliy V. Makeev
