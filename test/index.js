@@ -1,6 +1,8 @@
 'use strict'
 
-require('dotenv').config()
+try {
+  require('dotenv').config()
+} catch (e) {}
 
 let walk = require('walkdir')
 
