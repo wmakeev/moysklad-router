@@ -1,18 +1,20 @@
-function extractQueryValue(str) {
+'use strict'
+
+function extractQueryValue (str) {
   return str.indexOf(',') !== -1
     ? str.split(',').map(decodeURIComponent)
-    : decodeURIComponent(str);
+    : decodeURIComponent(str)
 }
 
-module.exports = function parseQueryString(queryString) {
-  var queryParams = {};
+module.exports = function parseQueryString (queryString) {
+  var queryParams = {}
   if (queryString) {
     queryString.split('&').forEach(function (queryPart) {
-      var kv = queryPart.split('=');
+      var kv = queryPart.split('=')
       queryParams[kv[0]] = kv[1]
         ? extractQueryValue(kv[1])
-        : null;
-    });
+        : null
+    })
   }
-  return queryParams;
-};
+  return queryParams
+}

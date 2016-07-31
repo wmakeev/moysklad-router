@@ -1,9 +1,9 @@
 'use strict'
 
 // https://regex101.com/r/uV6yS6/2
-let routeRegex = /#(?:([\w-]+)(?:\/(\w+))?(?:\?(.+))?)?/
+const routeRegex = /#(?:([\w-]+)(?:\/(\w+))?(?:\?(.+))?)?/
 
-let parseQueryString = require('./parse-query-string')
+const parseQueryString = require('./parse-query-string')
 
 module.exports = function parseHash (hash) {
   let match = routeRegex.exec(hash)
