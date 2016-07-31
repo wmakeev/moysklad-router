@@ -9,10 +9,8 @@
     "max-len": ["error", 100],
     "arrow-parens": 0,
     "indent": ["error", 2, { "SwitchCase": 1 }],
-    "no-shadow": ["error", {
-      "builtinGlobals": true, "hoist": "all", "allow": [
-        "cb", "done", "resolve", "reject", "t"
-      ]
+    "no-shadow": ["warn", {
+      "builtinGlobals": true, "hoist": "all"
     }],
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
     "no-inner-declarations": [2, "both"],
