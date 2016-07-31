@@ -3,7 +3,7 @@
 const test = require('blue-tape')
 const assign = require('lodash.assign')
 const sinon = require('sinon')
-const Router = require('../index')
+const moyskladRouter = require('../index')
 
 const setup = () => {
   global.window = {
@@ -19,7 +19,7 @@ const setup = () => {
   global.history = {
     replaceState: sinon.spy()
   }
-  return { router: Router() }
+  return { router: moyskladRouter() }
 }
 
 const teardown = () => {
@@ -38,13 +38,26 @@ let withSetup = testFn => t => {
   return testResult
 }
 
-test('router constructor', assert => {
-  assert.equal(typeof Router, 'function', 'to be function')
+test('moyskladRouter', assert => {
+  assert.equal(typeof moyskladRouter, 'function', 'to be function')
   assert.end()
 })
 
+test('moyskladRouter#buildUrl', withSetup(({ assert }) => {
+  assert.equal(typeof moyskladRouter.buildUrl, 'function', 'to be function')
+  let buildUrl = moyskladRouter.buildUrl
+  let url = buildUrl({
+    path: 'customerorder',
+    query: {
+      id: 'some-id'
+    }
+  })
+  assert.equal(url, 'https://online.moysklad.ru/app/#customerorder?id=some-id',
+    'build url for state')
+}))
+
 test('router', assert => {
-  let router = Router()
+  let router = moyskladRouter()
   let methods = [
     'start', 'stop', 'checkUrl', 'navigate', 'replaceState', 'refresh', 'getState',
     'getPath', 'getSection', 'getAction', 'getQuery', 'on', 'off'

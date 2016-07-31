@@ -13,14 +13,8 @@ const setup = () => {
       protocol: 'https:',
       hostname: 'online.moysklad.ru',
       pathname: '/app/'
-    },
-    // onhashchange: {},
-    // addEventListener: sinon.spy(),
-    // removeEventListener: sinon.spy()
+    }
   }
-  // global.history = {
-  //   replaceState: sinon.spy()
-  // }
 }
 
 const teardown = () => {
